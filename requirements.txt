@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 flask
 pandas
 numpy
 scikit-learn
 gunicorn
+=======
+flask
+pandas
+numpy
+scikit-learn
+gunicorn
+>>>>>>> 64d109b (fix port issue and add /test endpoint)

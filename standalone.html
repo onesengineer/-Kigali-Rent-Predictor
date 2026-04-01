@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,3 +53,59 @@
   </script>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kigali Rent API Test</title>
+</head>
+<body>
+  <h1>Kigali Rent Predictor API Demo</h1>
+  <form id="predictionForm">
+    <label>Location: <input name="location" value="Gisozi" required></label><br>
+    <label>Size (m²): <input name="size_m2" type="number" value="120" required></label><br>
+    <label>Year Built: <input name="year_built" type="number" value="2015" required></label><br>
+    <label>Rooms: <input name="num_rooms" type="number" value="3" required></label><br>
+    <label><input name="near_main_road" type="checkbox" checked> Near Main Road</label><br>
+    <label><input name="water_available" type="checkbox" checked> Water Available</label><br>
+    <label><input name="electricity_available" type="checkbox" checked> Electricity Available</label><br>
+    <button type="submit">Predict</button>
+  </form>
+
+  <h2>Result</h2>
+  <pre id="result">None</pre>
+
+  <script>
+    const form = document.getElementById('predictionForm');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      const payload = {
+        location: formData.get('location'),
+        size_m2: Number(formData.get('size_m2')),
+        year_built: Number(formData.get('year_built')),
+        num_rooms: Number(formData.get('num_rooms')),
+        near_main_road: formData.get('near_main_road') ? 1 : 0,
+        water_available: formData.get('water_available') ? 1 : 0,
+        electricity_available: formData.get('electricity_available') ? 1 : 0
+      };
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/predict', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await response.json();
+        result.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        result.textContent = 'Error: ' + error.message;
+      }
+    });
+  </script>
+</body>
+</html>
+>>>>>>> 64d109b (fix port issue and add /test endpoint)

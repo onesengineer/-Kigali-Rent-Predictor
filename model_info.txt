@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 Best model: LinearRegression
+=======
+Best model: LinearRegression
+>>>>>>> 64d109b (fix port issue and add /test endpoint)
 R2 Score: 0.8942
